@@ -1,0 +1,30 @@
+
+<div class="jumbotron col-xs-12">
+
+  <form class="form-inline" method="post" action="">
+    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+
+    <div class="form-group">
+      <input type="text" name="term" class="form-control" value="<%= params[:term] %>" id="term" placeholder="Search by player or team">
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="only_forward" value="true" <%= params[:only_forward] == "true" ? "checked" : "" %>> Search only forwards
+      </label>
+    </div>
+    <button type="submit" class="btn btn-default">Search</button>
+    <% unless @players.nil?  %>
+    <nav class="" aria-label="Page navigation">
+
+        <% if try(:sort_column).present? %>
+            <input type="hidden" name="sort" value="<%= params[:sort] %>"/>
+            <input type="hidden" name="direction" value="<%= try(:sort_direction) %>"/>
+            <input type="hidden" name="type" value="<%= params[:type] %>"/>
+        <% end %>
+
+      <%= paginate(@total, @page, @limit) %>
+    </nav>
+    <% end %>
+  </form>
+</div>
+
