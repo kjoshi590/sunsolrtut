@@ -12,7 +12,13 @@ class SearchController < ApplicationController
     page = @page
     limit = @limit
     search =  Player.search do |searcher|
-      searcher.fulltext search_params[:term] if search_params[:term].present?
+
+
+        fields = [:name, :club_name]
+        searcher.any do
+          fulltext search_params[:term], :fields => fields
+        end
+
       searcher.with(:position, "FWD") if search_params[:only_forward] == 'true'
       searcher.order_by params[:sort_by], params[:sort_direction]
       searcher.paginate :page => page, :per_page => limit
