@@ -11,19 +11,18 @@ class SearchController < ApplicationController
   def search_players
     page = @page
     limit = @limit
-    search =  Player.search do |searcher|
-
-
-        fields = [:name, :club_name]
+    @search =  Player.search(include: [:team,:player_statistic]) do |searcher|
+      fields = [:name, :club_name]
         searcher.any do
           fulltext search_params[:term], :fields => fields
         end
 
       searcher.with(:position, "FWD") if search_params[:only_forward] == 'true'
       searcher.order_by params[:sort_by], params[:sort_direction]
+        searcher.facet(:position)
       searcher.paginate :page => page, :per_page => limit
     end
-    @players,@total, @total_pages = search.results, search.total, search.results.total_pages
+    @players,@total, @total_pages = @search.results, @search.total, @search.results.total_pages
     render 'search/search'
   end
 

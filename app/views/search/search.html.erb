@@ -4,20 +4,37 @@
 
 
 <% unless @players.nil?  %>
-    <% if @players.count > 0 %>
-    <h3>These are the search results:</h3>
-    <% @players.each do |player| %>
 
-            <div class="list-group">
-              <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading"><%= player.name %></h4>
-                <p class="list-group-item-text"><%= player.club_name %></p>
-              </a>
-            </div>
+    <div class="row">
+      <div class="col-xs-3">
 
-    <% end %>
-    <% else %>
-        <h3>No results found.</h3>
+        <h3>Browse by Position</h3>
+        <ul class="facet">
+          <% for row in @search.facet(:position).rows -%>
+              <li><%= link_to(row.value, url_for(:position => row.value)) %> (<%= row.count %>)</li>
+          <% end -%>
+        </ul>
+
+      </div>
+      <div class="col-xs-9">
+        <% if @players.count > 0 %>
+            <h3>These are the search results:</h3>
+            <% @players.each do |player| %>
+
+                <div class="list-group">
+                  <a href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading"><%= player.name %></h4>
+                    <p class="list-group-item-text"><%= player.club_name %></p>
+                  </a>
+                </div>
+
+            <% end %>
+        <% else %>
+            <h3>No results found.</h3>
         <% end %>
+      </div>
+
+    </div>
+
 <% end %>
 
