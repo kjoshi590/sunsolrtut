@@ -1,7 +1,7 @@
 
 <div class="jumbotron col-xs-12">
 
-  <form class="form-inline" method="post" action="">
+  <form class="form-inline" method="post" action="" id="pagination-form">
     <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
 
     <div class="form-group">
@@ -13,17 +13,33 @@
       </label>
     </div>
     <button type="submit" class="btn btn-default">Search</button>
+
+    <h3>Sort By:</h3>
+    <label class="radio-inline">
+      <input type="radio" name="sort_by" id="inlineRadio1" value="name" <%= params[:sort_by] == "name" ? "checked" : "" %>>  By Name
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="sort_by" id="inlineRadio2" value="minutes_played" <%= params[:sort_by] == "minutes_played" ? "checked" : "" %>> By Minutes Played
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="sort_by" id="inlineRadio3" value="points" <%= params[:sort_by] == "points" ? "checked" : "" %>> By Points
+    </label>
+    <br>
+    <label class="checkbox-inline">
+      <input type="checkbox" name="sort_direction" value="desc" <%= params[:sort_direction] == "desc" ? "checked" : "" %>> Descending order
+    </label>
+
+
     <% unless @players.nil?  %>
-    <nav class="" aria-label="Page navigation">
+      <nav class="" aria-label="Page navigation">
 
-        <% if try(:sort_column).present? %>
-            <input type="hidden" name="sort" value="<%= params[:sort] %>"/>
-            <input type="hidden" name="direction" value="<%= try(:sort_direction) %>"/>
-            <input type="hidden" name="type" value="<%= params[:type] %>"/>
-        <% end %>
+          <% if try(:sort_column).present? %>
+              <input type="hidden" name="sort" value="<%= params[:sort] %>"/>
+              <input type="hidden" name="direction" value="<%= try(:sort_direction) %>"/>
+          <% end %>
 
-      <%= paginate(@total, @page, @limit) %>
-    </nav>
+        <%= pagination_buttons(@total, @page, @limit) %>
+      </nav>
     <% end %>
   </form>
 </div>

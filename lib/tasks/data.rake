@@ -20,7 +20,7 @@ namespace :data do
   task teams: :environment do
     puts('Creating Teams')
     (0..19).each do |i|
-      Team.create(short_name: team_shortnames[i],name:team_names[i],color: team_colors[i])
+      Team.create(short_name: team_shortnames[i],club_name:team_names[i],color: team_colors[i])
       print('.')
     end
   end
@@ -37,7 +37,7 @@ namespace :data do
   task stats: :environment do
     puts('Creating Disciplinary records')
     players_data.each do |player|
-      PlayerStatistic.create(player_id: player_count, goals:(player[17] ||0), assists: (player[32]||0),minutes_played: (player[39]||0), saves:(player[15]||0), yellow_cards: (player[12] || 0), red_cards: (player[42] || 0))
+      PlayerStatistic.create(player_id: player_count, goals:(player[17] ||0), assists: (player[32]||0),minutes_played: (player[39]||0), saves:(player[15]||0), yellow_cards: (player[12] || 0), red_cards: (player[42] || 0), points:(player[6] || 0))
       player_count = player_count + 1
       print ('.')
     end

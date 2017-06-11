@@ -8,6 +8,7 @@ class CreatePlayerStatistics < ActiveRecord::Migration[5.0]
       t.integer :saves
       t.integer :yellow_cards
       t.integer :red_cards
+      t.integer :points
     end
     add_foreign_key :player_statistics, :players
   end

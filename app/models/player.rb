@@ -1,19 +1,29 @@
 class Player < ApplicationRecord
 
 
+  has_one :player_statistic
 
 
   searchable do
     text    :name, as: :name_acs
     time    :created_at, stored: true
     time    :updated_at, stored: true
-
     string :position
-
+    string :name
+    integer :minutes_played
+    integer :points
   end
 
 
   def name
     first_name + ' ' +  last_name
+  end
+
+  def minutes_played
+    self.player_statistic.minutes_played
+  end
+
+  def points
+    self.player_statistic.points
   end
 end
