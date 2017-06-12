@@ -2,25 +2,37 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-class SearchPage
+class SOLR.SearchPage
   constructor: (@container) ->
     @init()
 
+
   init: ->
     #the events for checkboxes of facet
+    @searchFormObject = {}
+    @searchFormObject['position'] = []
     @container.find('.facet-check-box').click (e)=>
+      @searchFormObject['position'].push(e.target.value)
       @filterSearch()
 
   filterSearch: ->
-     debugger
-     data = getFormData()
+     data = @container.find('#search-players-form').serializeArray()
+     $.each data, (i, v) =>
+       @searchFormObject[v.name] = v.value
+     @searchFormObject['facet_call'] = true
+     #Now that the form data is ready make an AJAX call to the search players
+     $.ajax
+        type: "POST"
+        url: "/search_players"
+        data: @searchFormObject
+        success: (data, textStatus, jqXHR) =>
+            @container.find('.player-search-results-container').html(data)
+        error: (jqXHR, textStatus, errorThrown) ->
+            alert(message: jqXHR.responseJSON.message)
 
-  getFormData:  ->
-    unindexed_array = @container.find('#search-players-form').serializeArray()
-    indexed_array = {}
-    $.map unindexed_array, (n, i) ->
-      indexed_array[n['name']] = n['value']
-      return indexed_array
+
+
+
 
 
 

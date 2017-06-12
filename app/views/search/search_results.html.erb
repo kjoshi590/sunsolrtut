@@ -1,0 +1,14 @@
+<% if @players.count > 0 %>
+    <h4> <%= @total %> total players found.</h4>
+    <h3>These are the search results:</h3>
+    <% @players.each do |player| %>
+        <div class="list-group">
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading"><%= player.name %></h4>
+            <p class="list-group-item-text"><%= player.club_name %></p>
+          </a>
+        </div>
+    <% end %>
+<% else %>
+    <h3>No results found.</h3>
+<% end %>

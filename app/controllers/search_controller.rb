@@ -16,14 +16,19 @@ class SearchController < ApplicationController
         searcher.any do
           fulltext search_params[:term], :fields => fields
         end
-
       searcher.with(:position, "FWD") if search_params[:only_forward] == 'true'
+      searcher.with(:position, params[:position]) if params[:position].present?
       searcher.order_by params[:sort_by], params[:sort_direction]
-        searcher.facet(:position)
+      searcher.facet(:position)
       searcher.paginate :page => page, :per_page => limit
     end
     @players,@total, @total_pages = @search.results, @search.total, @search.results.total_pages
-    render 'search/search'
+    if params[:facet_call].present?
+      render 'search/search_results', layout: false
+    else
+      render 'search/search'
+    end
+
   end
 
 
