@@ -16,7 +16,7 @@ class SearchController < ApplicationController
         searcher.any do
           fulltext search_params[:term], :fields => fields
         end
-      searcher.with(:position, "FWD") if search_params[:only_forward] == 'true'
+      searcher.with(:minutes_played).greater_than(100) if search_params[:active_only] == 'true'
       searcher.with(:position, params[:position]) if params[:position].present?
       searcher.order_by params[:sort_by], params[:sort_direction]
       searcher.facet(:position)
@@ -39,7 +39,7 @@ class SearchController < ApplicationController
   end
 
   def search_params
-    params.permit( :term, :position, :country, :only_forward, :authenticity_token)
+    params.permit( :term, :position, :country, :active_only, :authenticity_token)
   end
 
 end

@@ -1,34 +1,53 @@
 
-<div class="jumbotron col-xs-12">
+<div class="col-xs-12">
 
   <form class="form-inline" method="post" action="/search" id="search-players-form">
     <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
 
-    <div class="form-group">
-      <input type="text" name="term" class="form-control" value="<%= params[:term] %>" id="term" placeholder="Search by player or team">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="input-group main-form-inputs">
+          <input type="text" name="term" id="term" class="form-control" value="<%= params[:term] %>" placeholder="Search by name, club...">
+          <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Search</button>
+      </span>
+        </div>
+      </div>
+      <div class="checkbox col-xs-12">
+        <br>
+        <label>
+          <input type="checkbox" name="active_only" value="true" <%= params[:active_only] == "true" ? "checked" : "" %>> Only those who played for more than 100 minutes
+        </label>
+      </div>
     </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" name="only_forward" value="true" <%= params[:only_forward] == "true" ? "checked" : "" %>> Search only forwards
-      </label>
+
+
+    <h5>Sort By:</h5>
+    <div class="row">
+    <div class="col-xs-6">
+    <label class="radio-inline">
+      <input type="radio" name="sort_by" id="inlineRadio1" value="name" <%= params[:sort_by] == "name" ? "checked" : "" %>>  Name
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="sort_by" id="inlineRadio2" value="minutes_played" <%= params[:sort_by] == "minutes_played" ? "checked" : "" %>> Minutes Played
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="sort_by" id="inlineRadio3" value="points" <%= params[:sort_by] == "points" ? "checked" : "" %>> Points
+    </label>
     </div>
-    <button type="submit" class="btn btn-default">Search</button>
 
-    <h3>Sort By:</h3>
+      <div class="col-xs-6">
+    <label>Order:</label>
+
     <label class="radio-inline">
-      <input type="radio" name="sort_by" id="inlineRadio1" value="name" <%= params[:sort_by] == "name" ? "checked" : "" %>>  By Name
+      <input type="radio" name="sort_direction" id="inlineRadio1" value="asc" <%= params[:sort_direction] == "asc" ? "checked" : "" %>>  Acsending
     </label>
     <label class="radio-inline">
-      <input type="radio" name="sort_by" id="inlineRadio2" value="minutes_played" <%= params[:sort_by] == "minutes_played" ? "checked" : "" %>> By Minutes Played
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="sort_by" id="inlineRadio3" value="points" <%= params[:sort_by] == "points" ? "checked" : "" %>> By Points
-    </label>
-    <br>
-    <label class="checkbox-inline">
-      <input type="checkbox" name="sort_direction" value="desc" <%= params[:sort_direction] == "desc" ? "checked" : "" %>> Descending order
+      <input type="radio" name="sort_direction" id="inlineRadio2" value="desc" <%= params[:sort_direction] == "desc" ? "checked" : "" %>> Descending
     </label>
 
+    </div>
+    </div>
 
     <% unless @players.nil?  %>
       <nav class="" aria-label="Page navigation">

@@ -19,6 +19,7 @@ class Player < ApplicationRecord
 
 
 
+
   end
 
 
