@@ -1,0 +1,2 @@
+class TeamSearchController < ApplicationController
+end

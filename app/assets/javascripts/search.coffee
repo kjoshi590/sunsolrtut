@@ -12,7 +12,11 @@ class SOLR.SearchPage
     @searchFormObject = {}
     @searchFormObject['position'] = []
     @container.find('.facet-check-box').click (e)=>
-      @searchFormObject['position'].push(e.target.value)
+      if e.target.checked
+        @searchFormObject['position'].push(e.target.value)
+      else
+        index = @searchFormObject['position'].indexOf(e.target.value)
+        @searchFormObject['position'].splice index, 1
       @filterSearch()
 
   filterSearch: ->
@@ -23,7 +27,7 @@ class SOLR.SearchPage
      #Now that the form data is ready make an AJAX call to the search players
      $.ajax
         type: "POST"
-        url: "/search_players"
+        url: "/search"
         data: @searchFormObject
         success: (data, textStatus, jqXHR) =>
             @container.find('.player-search-results-container').html(data)

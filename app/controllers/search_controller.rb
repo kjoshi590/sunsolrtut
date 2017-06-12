@@ -4,7 +4,7 @@ class SearchController < ApplicationController
   before_action :paginate_params, only: [:search_players]
   before_action :set_sort_params, only: [:search_players]
 
-  def search
+  def new_search
 
   end
 
@@ -26,10 +26,11 @@ class SearchController < ApplicationController
     if params[:facet_call].present?
       render 'search/search_results', layout: false
     else
-      render 'search/search'
+      render 'search/new_search'
     end
-
   end
+
+
 
 
   def set_sort_params

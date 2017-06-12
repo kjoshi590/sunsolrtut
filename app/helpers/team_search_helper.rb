@@ -1,0 +1,2 @@
+module TeamSearchHelper
+end
