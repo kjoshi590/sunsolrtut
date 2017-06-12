@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-class ECLT.SearchPage
+class SearchPage
   constructor: (@container) ->
     @init()
 
@@ -10,7 +10,18 @@ class ECLT.SearchPage
     #the events for checkboxes of facet
     @container.find('.facet-check-box').click (e)=>
       @filterSearch()
-    @container.find(".facet-reset").addClass('hidden') unless  @container.find(".#{@facetName}-list").find("input:checked").length > 0
+
+  filterSearch: ->
+     debugger
+     data = getFormData()
+
+  getFormData:  ->
+    unindexed_array = @container.find('#search-players-form').serializeArray()
+    indexed_array = {}
+    $.map unindexed_array, (n, i) ->
+      indexed_array[n['name']] = n['value']
+      return indexed_array
+
 
 
 
