@@ -13,7 +13,7 @@ player_count = 1
 
 team_shortnames = ['ARS','BOU','BUR','CHE','CRY','EVE','HUL','LEI','LIV','MCI','MUN','MID','SOU','STK','SUN','SWA','TOT','WAT','WBA','WHU']
 team_names = ['Arsenal', 'Bournemouth','Burnley','Chelsea','Crystal Palace','Everton','Hull City','Leicester City','Liverpool','Manchester City','Manchester United','Middlesbrough','Southampton','Stoke City','Sunderland','Swansea City','Tottenham','Watford','West Bromwich Albion','West Ham United']
-team_colors = ['#FFE9E1','#C01115','#6a003a','#0a4595','#eb302e','#00369c','#faa61a','#273e8a','#e31b23','#6caee0','#d81920','#fd1a21','#d71920','#d71f30','#e31c23','#f5f5f5','#131f53','#ffee00','#102d69','#7d2c3b']
+team_colors = ['#cf1043','#C01115','#6a003a','#0a4595','#eb302e','#00369c','#faa61a','#273e8a','#e31b23','#6caee0','#d81920','#fd1a21','#d71920','#d71f30','#e31c23','#f5f5f5','#131f53','#ffee00','#102d69','#7d2c3b']
 
 namespace :data do
 
