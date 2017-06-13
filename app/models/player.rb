@@ -12,8 +12,10 @@ class Player < ApplicationRecord
     integer :minutes_played
     integer :points
     integer :team_id
+    string  :club_name
 
     join(:club_name, :target => Team, :type => :text, :join => {:from => :id, :to => :team_id},as: :club_name_acs)
+    join(:club_name, :target => Team, :type => :string, :join => {:from => :id, :to => :team_id})
   end
 
 

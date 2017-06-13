@@ -5,15 +5,16 @@ class Team < ApplicationRecord
 
   searchable do
     text    :club_name, as: :club_name_acs
+    text    :city, as: :city_acs
     integer :id
 
-    string :club_name
-    string :city
-    string :stadium
+    string  :club_name
+    string  :city
+    string  :stadium
 
     integer :goals_scored
     integer :cards
-    integer :points
+
 
     join(:name, :target => Player, :type => :text, :join => {:from => :team_id, :to => :id},as: :name_acs)
   end

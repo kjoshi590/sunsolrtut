@@ -10,10 +10,13 @@ class TeamSearchController < ApplicationController
   def search_teams
 
       @search =  Team.search() do |searcher|
-        searcher.fulltext search_params[:term]
+
+        searcher.fulltext search_params[:term] do
+            fields(:name,:city,:club_name => 2.0)
+          end
         searcher.with(:city,'London') if search_params[:london_only] == 'true'
         searcher.with(:city, params[:city]) if params[:city].present?
-        searcher.order_by params[:sort_by], params[:sort_direction]
+        #searcher.order_by params[:sort_by], params[:sort_direction]
         searcher.facet(:city)
       end
       @teams,@total = @search.results, @search.total
