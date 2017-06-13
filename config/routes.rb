@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/search', to: 'search#new_search', as:'new_search'
   post '/search', to: 'search#search_players', as: 'search_players'
 
-  get '/search_teams', to: 'search#new_search_team', as:'new_search_team'
-  post '/search_teams', to: 'search#search_teams', as: 'search_teams'
+  get '/search_teams', to: 'team_search#new_search_team', as:'new_search_team'
+  post '/search_teams', to: 'team_search#search_teams', as: 'search_teams'
 
 end

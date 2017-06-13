@@ -14,13 +14,15 @@ player_count = 1
 team_shortnames = ['ARS','BOU','BUR','CHE','CRY','EVE','HUL','LEI','LIV','MCI','MUN','MID','SOU','STK','SUN','SWA','TOT','WAT','WBA','WHU']
 team_names = ['Arsenal', 'Bournemouth','Burnley','Chelsea','Crystal Palace','Everton','Hull City','Leicester City','Liverpool','Manchester City','Manchester United','Middlesbrough','Southampton','Stoke City','Sunderland','Swansea City','Tottenham','Watford','West Bromwich Albion','West Ham United']
 team_colors = ['#cf1043','#C01115','#6a003a','#0a4595','#eb302e','#00369c','#faa61a','#273e8a','#e31b23','#6caee0','#d81920','#fd1a21','#d71920','#d71f30','#e31c23','#f5f5f5','#131f53','#ffee00','#102d69','#7d2c3b']
+team_cities =['London','Bournemath','Burnley', 'London','London','Liverpool','Kinston upon Hull','Leicester','Liverpool','Manchester','Manchester','Middlesbrough','Southampton','Stoke-on-Trent','Sunderland','Swansea','London','Watford','West Bromwich','London']
+team_stadiums =['Emirates Stadium', 'Dean Court','Turf Moor','Stamford Bridge','Selhust Park','Goodison Park','KCOM stadium','King Power Stadium','Anfield','Etihad Stadium','Old trafford','Riverside Stadium','St Mary Stadium','bet 365 Stadium','Stadium of Light','Liberty Stadium','White Heart Lane','Vicarage Road','The Hawthorns','London Stadium']
 
 namespace :data do
 
   task teams: :environment do
     puts('Creating Teams')
     (0..19).each do |i|
-      Team.create(short_name: team_shortnames[i],club_name:team_names[i],color: team_colors[i])
+      Team.create(short_name: team_shortnames[i],club_name:team_names[i],color: team_colors[i],city:team_cities[i],stadium: team_stadiums[i])
       print('.')
     end
   end

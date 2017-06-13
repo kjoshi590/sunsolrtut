@@ -6,7 +6,6 @@ class Createplayerstable < ActiveRecord::Migration[5.0]
       t.string :last_name
       t.references :team, index: true
       t.string :position
-      t.timestamps null: false
     end
     add_foreign_key :players, :teams
   end

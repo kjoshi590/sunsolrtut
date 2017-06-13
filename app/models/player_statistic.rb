@@ -6,6 +6,7 @@ class PlayerStatistic < ApplicationRecord
 
    integer :minutes_played
    integer :points
+   integer :goals
 
 
   end

@@ -1,0 +1,53 @@
+
+<div class="col-xs-12">
+
+  <form class="form-inline" method="post" action="/search_teams" id="search-players-form">
+    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="input-group main-form-inputs">
+          <input type="text" name="term" id="term" class="form-control" value="<%= params[:term] %>" placeholder="Search by name, city...">
+          <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Search</button>
+      </span>
+        </div>
+      </div>
+      <div class="checkbox col-xs-12">
+        <br>
+        <label>
+          <input type="checkbox" name="london_only" value="true" <%= params[:london_only] == "true" ? "checked" : "" %>> Only those teams who are based in London
+        </label>
+      </div>
+    </div>
+
+
+    <h5>Sort By:</h5>
+    <div class="row">
+      <div class="col-xs-6">
+        <label class="radio-inline">
+          <input type="radio" name="sort_by" id="inlineRadio1" value="club_name" <%= params[:sort_by] == "club_name" ? "checked" : "" %>>  Name
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="sort_by" id="inlineRadio2" value="goals_scored" <%= params[:sort_by] == "goals_scored" ? "checked" : "" %>> Goals scored
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="sort_by" id="inlineRadio3" value="cards" <%= params[:sort_by] == "cards" ? "checked" : "" %>> Cards
+        </label>
+      </div>
+
+      <div class="col-xs-6">
+        <label>Order:</label>
+
+        <label class="radio-inline">
+          <input type="radio" name="sort_direction" id="inlineRadio1" value="asc" <%= params[:sort_direction] == "asc" ? "checked" : "" %>>  Acsending
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="sort_direction" id="inlineRadio2" value="desc" <%= params[:sort_direction] == "desc" ? "checked" : "" %>> Descending
+        </label>
+
+      </div>
+    </div>
+  </form>
+</div>
+

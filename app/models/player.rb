@@ -7,8 +7,6 @@ class Player < ApplicationRecord
 
   searchable do
     text    :name, as: :name_acs
-    time    :created_at, stored: true
-    time    :updated_at, stored: true
     string  :position
     string  :name
     integer :minutes_played
@@ -16,10 +14,6 @@ class Player < ApplicationRecord
     integer :team_id
 
     join(:club_name, :target => Team, :type => :text, :join => {:from => :id, :to => :team_id},as: :club_name_acs)
-
-
-
-
   end
 
 
