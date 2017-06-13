@@ -1,5 +1,9 @@
 <% content_for :search_header do %>
-    Players
+    <h1>EPL SOLR Search <small>Players</small>
+      <span class="pull-right search-links">
+        <a href="/search"><i class="glyphicon glyphicon-refresh"></i></a>
+        <a href="/search_teams">Teams</a>
+    </span></h1>
 <% end %>
 <div class="players-search-container">
 
@@ -21,7 +25,7 @@
         </ul>
 
       </div>
-      <div class="col-xs-9  player-search-results-container">
+      <div class="col-xs-9  search-results-container">
         <% if @players.count > 0 %>
             <h4> <%= @total %> players found.</h4>
             <br>
@@ -50,7 +54,7 @@
 
 <script>
     $(document).ready(function () {
-        new SOLR.SearchPage($(".players-search-container"));
+        new SOLR.SearchPage($(".players-search-container"),'position','/search');
     })
 </script>
 

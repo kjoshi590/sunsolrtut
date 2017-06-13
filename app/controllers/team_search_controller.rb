@@ -12,11 +12,17 @@ class TeamSearchController < ApplicationController
       @search =  Team.search() do |searcher|
         searcher.fulltext search_params[:term]
         searcher.with(:city,'London') if search_params[:london_only] == 'true'
+        searcher.with(:city, params[:city]) if params[:city].present?
         searcher.order_by params[:sort_by], params[:sort_direction]
         searcher.facet(:city)
       end
       @teams,@total = @search.results, @search.total
-      render 'team_search/new_search_team'
+
+      if params[:facet_call].present?
+        render 'team_search/team_search_results', layout: false
+      else
+        render 'team_search/new_search_team'
+      end
   end
 
   def set_sort_params
@@ -25,6 +31,6 @@ class TeamSearchController < ApplicationController
   end
 
   def search_params
-    params.permit( :term, :london_only, :authenticity_token)
+    params.permit( :term, :london_only, :city, :authenticity_token)
   end
 end

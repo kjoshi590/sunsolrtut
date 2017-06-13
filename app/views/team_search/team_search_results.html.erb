@@ -1,0 +1,19 @@
+<% if @teams.count > 0 %>
+    <h4> <%= @total %> teams found.</h4>
+    <br>
+    <% @teams.each do |team| %>
+        <div class="list-group row">
+          <div class="col-xs-2 player-number" style="background-color: <%= team.color %>">
+            <%= team.short_name %>
+          </div>
+          <div class="col-xs-10 player-details">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading"><%= team.club_name %></h4>
+              <p class="list-group-item-text"><%= team.stadium %> | <%= team.city %></p>
+            </a>
+          </div>
+        </div>
+    <% end %>
+<% else %>
+    <h3>No results found.</h3>
+<% end %>

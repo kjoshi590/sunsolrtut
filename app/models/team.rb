@@ -13,6 +13,7 @@ class Team < ApplicationRecord
 
     integer :goals_scored
     integer :cards
+    integer :points
 
     join(:name, :target => Player, :type => :text, :join => {:from => :team_id, :to => :id},as: :name_acs)
   end
@@ -28,4 +29,7 @@ class Team < ApplicationRecord
     self.player_statistics.map {|s| cards += (s.yellow_cards + (s.red_cards*2))}
     return cards
   end
+
+
+
 end

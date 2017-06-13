@@ -11,6 +11,7 @@
 
 
 .app-logo{
+
   position: absolute;
   top:0;
   left:0;
@@ -29,4 +30,20 @@
 
 .player-details{
   padding:0px !important;
+}
+
+.search-links{
+
+  a{
+    font-size: 12px;
+    color: white;
+    text-decoration: none;
+
+    &:hover{
+
+      color: white;
+      text-decoration: none;
+
+    }
+  }
 }

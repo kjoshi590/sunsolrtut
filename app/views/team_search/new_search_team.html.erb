@@ -1,53 +1,62 @@
 <% content_for :search_header do %>
-    Teams
+    <h1>EPL SOLR Search
+      <small>Teams</small>
+      <span class="pull-right search-links">
+      <a href="/search_teams"><i class="glyphicon glyphicon-refresh"></i></a>
+      <a href="/search">Players</a>
+    </span></h1>
 <% end %>
-<div class="row">
-  <%= render 'team_search/team_search_form' %>
-</div>
+<div class="teams-search-container">
+  <div class="row">
+    <%= render 'team_search/team_search_form' %>
+  </div>
 
 
-<% unless @teams.nil?  %>
+  <% unless @teams.nil? %>
 
-    <div class="row">
-      <div class="col-xs-3">
-        <h3>Browse by City</h3>
-        <ul class="list-group">
-          <% for row in @search.facet(:city).rows -%>
-              <li class="list-group-item"><input type="checkbox" class="facet-check-box" name="position" value="<%= row.value %>" <%= params[:city] == row.value ? "checked" : "" %>> <%= row.value %> (<%= row.count %>)</li>
-          <% end -%>
-        </ul>
+      <div class="row">
+        <div class="col-xs-3">
+          <h3>Browse by City</h3>
+          <ul class="list-group">
+            <% for row in @search.facet(:city).rows -%>
+                <li class="list-group-item">
+                  <input type="checkbox" class="facet-check-box" name="position" value="<%= row.value %>" <%= params[:city] == row.value ? "checked" : "" %>> <%= row.value %>
+                  (<%= row.count %>)
+                </li>
+            <% end -%>
+          </ul>
+
+        </div>
+        <div class="col-xs-9  search-results-container">
+          <% if @teams.count > 0 %>
+              <h4> <%= @total %> teams found.</h4>
+              <br>
+              <% @teams.each do |team| %>
+                  <div class="list-group row">
+                    <div class="col-xs-2 player-number" style="background-color: <%= team.color %>">
+                      <%= team.short_name %>
+                    </div>
+                    <div class="col-xs-10 player-details">
+                      <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading"><%= team.club_name %></h4>
+                        <p class="list-group-item-text"><%= team.stadium %> | <%= team.city %></p>
+                      </a>
+                    </div>
+                  </div>
+              <% end %>
+          <% else %>
+              <h3>No results found.</h3>
+          <% end %>
+        </div>
 
       </div>
-      <div class="col-xs-9  team-search-results-container">
-        <% if @teams.count > 0 %>
-            <h4> <%= @total %> teams found.</h4>
-            <br>
-            <% @teams.each do |team| %>
-                <div class="list-group row">
-                  <div class="col-xs-2 player-number" style="background-color: <%= team.color %>">
-                    <%= team.short_name %>
-                  </div>
-                  <div class="col-xs-10 player-details">
-                    <a href="#" class="list-group-item">
-                      <h4 class="list-group-item-heading"><%= team.club_name %></h4>
-                      <p class="list-group-item-text"><%= team.stadium %> | <%= team.city %></p>
-                    </a>
-                  </div>
-                </div>
-            <% end %>
-        <% else %>
-            <h3>No results found.</h3>
-        <% end %>
-      </div>
 
-    </div>
-
-<% end %>
+  <% end %>
 </div>
-
+</div>
 <script>
     $(document).ready(function () {
-        new SOLR.SearchPage($(".teams-search-container"));
+        new SOLR.SearchPage($(".teams-search-container"), 'city', '/search_teams');
     })
 </script>
 

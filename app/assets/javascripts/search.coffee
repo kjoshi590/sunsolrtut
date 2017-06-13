@@ -3,34 +3,34 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 class SOLR.SearchPage
-  constructor: (@container) ->
+  constructor: (@container,@facetName,@url) ->
     @init()
 
 
   init: ->
     #the events for checkboxes of facet
     @searchFormObject = {}
-    @searchFormObject['position'] = []
+    @searchFormObject[@facetName] = []
     @container.find('.facet-check-box').click (e)=>
       if e.target.checked
-        @searchFormObject['position'].push(e.target.value)
+        @searchFormObject[@facetName].push(e.target.value)
       else
-        index = @searchFormObject['position'].indexOf(e.target.value)
-        @searchFormObject['position'].splice index, 1
+        index = @searchFormObject[@facetName].indexOf(e.target.value)
+        @searchFormObject[@facetName].splice index, 1
       @filterSearch()
 
   filterSearch: ->
-     data = @container.find('#search-players-form').serializeArray()
+     data = @container.find('#search-form').serializeArray()
      $.each data, (i, v) =>
        @searchFormObject[v.name] = v.value
      @searchFormObject['facet_call'] = true
      #Now that the form data is ready make an AJAX call to the search players
      $.ajax
         type: "POST"
-        url: "/search"
+        url: @url
         data: @searchFormObject
         success: (data, textStatus, jqXHR) =>
-            @container.find('.player-search-results-container').html(data)
+            @container.find('.search-results-container').html(data)
         error: (jqXHR, textStatus, errorThrown) ->
             alert(message: jqXHR.responseJSON.message)
 
