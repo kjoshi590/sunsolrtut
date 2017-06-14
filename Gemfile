@@ -42,7 +42,7 @@ gem 'progress_bar'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
-gem 'kaminari'
+gem "font-awesome-rails"
 
 
 group :development, :test do

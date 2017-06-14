@@ -1,6 +1,5 @@
 <% if @players.count > 0 %>
     <h4> <%= @total %> players found.</h4>
-    <br>
     <% @players.each do |player| %>
         <div class="list-group row">
           <div class="col-xs-2 player-number" style="background-color: <%= player.team.color %>">
@@ -10,6 +9,8 @@
             <a href="#" class="list-group-item">
               <h4 class="list-group-item-heading"><%= player.name %></h4>
               <p class="list-group-item-text"><%= player.position %> | <%= player.club_name %></p>
+              <p><%= player.goals_scored %>&nbsp;<i class="fa fa-futbol-o"></i> &nbsp;<%= player.player_statistic.yellow_cards %>&nbsp;<i class="fa fa-file" style="color:yellow"></i>&nbsp;<%= player.player_statistic.red_cards %>&nbsp;<i class="fa fa-file" style="color:red"></i></p>
+
             </a>
           </div>
         </div>
