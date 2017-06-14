@@ -13,6 +13,7 @@ class Player < ApplicationRecord
     integer :points
     integer :team_id
     string  :club_name
+    integer :goals_scored
 
     join(:club_name, :target => Team, :type => :text, :join => {:from => :id, :to => :team_id},as: :club_name_acs)
     join(:club_name, :target => Team, :type => :string, :join => {:from => :id, :to => :team_id})
@@ -33,5 +34,9 @@ class Player < ApplicationRecord
 
   def points
     self.player_statistic.points
+  end
+
+  def goals_scored
+    self.player_statistic.goals
   end
 end

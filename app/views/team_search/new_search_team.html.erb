@@ -20,7 +20,7 @@
           <ul class="list-group">
             <% for row in @search.facet(:city).rows -%>
                 <li class="list-group-item">
-                  <input type="checkbox" class="facet-check-box" name="position" value="<%= row.value %>" <%= params[:city] == row.value ? "checked" : "" %>> <%= row.value %>
+                  <input type="checkbox" class="facet-check-box-city" name="city" value="<%= row.value %>" <%= params[:city] == row.value ? "checked" : "" %>> <%= row.value %>
                   (<%= row.count %>)
                 </li>
             <% end -%>

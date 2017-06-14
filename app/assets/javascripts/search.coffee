@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 class SOLR.SearchPage
-  constructor: (@container,@facetName,@url) ->
+  constructor: (@container,@facetName,@url,@facetType = 'checkbox') ->
     @init()
 
 
@@ -11,7 +11,8 @@ class SOLR.SearchPage
     #the events for checkboxes of facet
     @searchFormObject = {}
     @searchFormObject[@facetName] = []
-    @container.find('.facet-check-box').click (e)=>
+    @container.find(".facet-check-box-#{@facetName}").click (e)=>
+      @searchFormObject[@facetName]= [] if @facetType == 'radio'
       if e.target.checked
         @searchFormObject[@facetName].push(e.target.value)
       else
