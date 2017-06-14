@@ -31,6 +31,13 @@
           <% end -%>
         </ul>
 
+        <h4>Browse by Minutes Played</h4>
+        <ul class="list-group">
+          <% for row in @search.facet(:minutes_played).rows -%>
+              <li class="list-group-item"><input type="radio" class="facet-check-box-minutes_played" name="minutes_played" value="<%= row.value %>" <%= params[:minutes_played] == row.value ? "checked" : "" %>> <%= row.value %> (<%= row.count %>)</li>
+          <% end -%>
+        </ul>
+
       </div>
       <div class="col-xs-9 search-results-container">
         <% if @players.count > 0 %>

@@ -34,6 +34,8 @@ class SearchController < ApplicationController
         row(21..30) do
           with(:goals_scored, 21..30)
         end
+        #this is range facet
+        searcher.facet :minutes_played, :range => 0..4000, :range_interval => 500
       end
 
 
